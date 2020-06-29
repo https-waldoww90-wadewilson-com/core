@@ -149,3 +149,15 @@ Feature: upload file
       | dav_version |
       | old         |
       | new         |
+
+  @skipOnOcis @issue-ocis-reva-174
+  Scenario Outline: overwriting a file changes its mtime
+    Given using <dav_version> DAV path
+    When user "Alice" uploads file with content "uploaded content for file name ending with a dot" to "file.txt" using the WebDAV API
+    And user "Alice" uploads file to "file.txt" with mtime "Thu, 08 Aug 2019 04:18:13 GMT" using the WebDAV API
+    Then the HTTP status code should be "204"
+    And as "Alice" the mtime of the file "file.txt" should be "Thu, 08 Aug 2019 04:18:13 GMT"
+    Examples:
+      | dav_version |
+      | old         |
+      | new         |
