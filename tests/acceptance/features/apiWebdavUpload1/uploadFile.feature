@@ -150,7 +150,7 @@ Feature: upload file
       | old         |
       | new         |
 
-  @skipOnOcis @issue-ocis-reva-174
+  @issue-ocis-reva-174
   Scenario Outline: overwriting a file changes its mtime
     Given using <dav_version> DAV path
     And user "Alice" has uploaded file with content "first time upload content" to "file.txt"
