@@ -2113,7 +2113,7 @@ trait WebDav {
 			\array_pop($mtime);
 			$mtime = \implode(" ", $mtime);
 			Assert::assertContains(
-				$mtime, 
+				$mtime,
 				\TestHelpers\WebDavHelper::getMtimeOfResource($user, $password, $baseUrl, $resource)
 			);
 		} else {
