@@ -2108,20 +2108,12 @@ trait WebDav {
 		$user = $this->getActualUsername($user);
 		$password = $this->getPasswordForUser($user);
 		$baseUrl = $this->getBaseUrl();
-		if (\TestHelpers\OcisHelper::isTestingOnOcis()) {
-			$mtime = \explode(" ", $mtime);
-			\array_pop($mtime);
-			$mtime = \implode(" ", $mtime);
-			Assert::assertContains(
-				$mtime,
-				\TestHelpers\WebDavHelper::getMtimeOfResource($user, $password, $baseUrl, $resource)
-			);
-		} else {
-			Assert::assertEquals(
-				$mtime,
-				\TestHelpers\WebDavHelper::getMtimeOfResource($user, $password, $baseUrl, $resource)
-			);
-		}
+		$mtime = new DateTime($mtime);
+		$mtime = $mtime->format('U');
+		Assert::assertEquals(
+			$mtime,
+			\TestHelpers\WebDavHelper::getMtimeOfResource($user, $password, $baseUrl, $resource)
+		);
 	}
 
 	/**
@@ -2139,6 +2131,8 @@ trait WebDav {
 		$user = $this->getActualUsername($user);
 		$password = $this->getPasswordForUser($user);
 		$baseUrl = $this->getBaseUrl();
+		$mtime = new DateTime($mtime);
+		$mtime = $mtime->format('U');
 		Assert::assertNotEquals(
 			$mtime,
 			\TestHelpers\WebDavHelper::getMtimeOfResource($user, $password, $baseUrl, $resource)
