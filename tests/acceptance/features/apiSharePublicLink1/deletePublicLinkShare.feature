@@ -47,6 +47,8 @@ Feature: delete a public link share
     When user "Alice" deletes public link share named "sharedlink" in folder "test-folder" using the sharing API
     Then the HTTP status code should be "200"
     And the OCS status code should be "<ocs_status_code>"
+    And user "Alice" should see the following elements
+      | /test-folder/ |
     And as user "Alice" the folder "test-folder" should not have any shares
     Examples:
       | ocs_api_version | ocs_status_code |
